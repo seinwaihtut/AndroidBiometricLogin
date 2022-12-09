@@ -1,49 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainFragment"
-    android:orientation="vertical"
-    >
+    tools:context=".MainFragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
 
-    <Button
-        android:id="@+id/main_to_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="to login" />
-
-    <Button
-        android:id="@+id/main_exit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="exit"
-        />
-
-
-
-    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <com.google.android.material.textfield.TextInputEditText
+        <ImageView
+            android:id="@+id/main_person_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:maxWidth="200dp"
+            android:maxHeight="200dp"
+            android:minWidth="100dp"
+            android:minHeight="100dp"
+            android:src="@drawable/ic_outline_person"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/main_name_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="hint" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
- />
-    <com.google.android.material.textfield.TextInputEditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+            android:layout_margin="8dp"
+            android:text="Name"
+            android:textSize="24dp"
+            app:layout_constraintStart_toStartOf="@+id/main_person_image"
+            app:layout_constraintTop_toBottomOf="@+id/main_person_image" />
 
-    <EditText
-        android:id="@+id/editTextTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="time" />
-</androidx.appcompat.widget.LinearLayoutCompat>
+        <TextView
+            android:id="@+id/main_phone_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Phone"
+            android:textSize="24dp"
+            app:layout_constraintStart_toStartOf="@+id/main_person_image"
+            app:layout_constraintTop_toBottomOf="@+id/main_name_text" />
+
+
+        <TextView
+            android:id="@+id/main_email_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Email"
+            android:textSize="24dp"
+            app:layout_constraintStart_toStartOf="@+id/main_person_image"
+            app:layout_constraintTop_toBottomOf="@+id/main_phone_text" />
+
+        <Switch
+            android:id="@+id/main_biometric_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:minHeight="48dp"
+            android:showText="false"
+            android:text="Biometric"
+            android:textOff="DISABLED"
+            android:textOn="ENABLED"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="@+id/main_person_image"
+            app:layout_constraintTop_toBottomOf="@+id/main_email_text" />
+
+        <Button
+            android:id="@+id/main_edit_user_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Edit User Info"
+            app:layout_constraintStart_toStartOf="@+id/main_person_image"
+            app:layout_constraintTop_toBottomOf="@+id/main_biometric_switch" />
+
+        <Button
+            android:id="@+id/main_logout_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Logout"
+            app:layout_constraintStart_toStartOf="@+id/main_person_image"
+            app:layout_constraintTop_toBottomOf="@+id/main_edit_user_button" />
+
+        <Button
+            android:id="@+id/main_exit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Exit APP"
+            app:layout_constraintStart_toStartOf="@+id/main_person_image"
+            app:layout_constraintTop_toBottomOf="@+id/main_logout_button" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

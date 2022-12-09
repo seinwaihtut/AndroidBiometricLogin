@@ -8,30 +8,37 @@
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.example.biometriclogin.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        android:label="User Info"
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_login_nested_graph"
-            app:destination="@id/login_nested_graph" />
+            app:destination="@id/login_nested_graph"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_mainFragment_to_editUserInfo"
+            app:destination="@id/editUserInfo" />
     </fragment>
 
     <navigation android:id="@+id/login_nested_graph"
         app:startDestination="@id/loginFragment">
         <fragment
             android:id="@+id/registerFragment"
-            android:name="com.example.biometriclogin.RegisterFragment"
-            android:label="fragment_register"
+            android:name="com.example.biometriclogin.Login.Register.RegisterFragment"
+            android:label="Register"
             tools:layout="@layout/fragment_register">
             <action
                 android:id="@+id/action_registerFragment_to_loginFragment"
                 app:destination="@id/loginFragment"
-                app:popUpTo="@id/loginFragment"
-                app:popUpToInclusive="true" />
+                app:popUpTo="@id/login_nested_graph" />
+            <action
+                android:id="@+id/action_registerFragment_to_resetPassword"
+                app:destination="@id/resetPassword" />
         </fragment>
         <fragment
             android:id="@+id/loginFragment"
-            android:name="com.example.biometriclogin.LoginFragment"
-            android:label="fragment_login"
+            android:name="com.example.biometriclogin.Login.LoginFragment"
+            android:label="BiometricLoginTest"
             tools:layout="@layout/fragment_login">
             <action
                 android:id="@+id/action_loginFragment_to_mainFragment"
@@ -41,6 +48,64 @@
             <action
                 android:id="@+id/action_loginFragment_to_registerFragment"
                 app:destination="@id/registerFragment" />
+            <action
+                android:id="@+id/action_loginFragment_to_biometricSetupFragment"
+                app:destination="@id/biometricSetupFragment" />
+            <action
+                android:id="@+id/action_loginFragment_to_resetPassword"
+                app:destination="@id/resetPassword"
+                app:popUpToInclusive="false" />
+            <action
+                android:id="@+id/action_loginFragment_to_verificationFragment"
+                app:destination="@id/verificationFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/biometricSetupFragment"
+            android:name="com.example.biometriclogin.Login.BiometricSetupFragment"
+            android:label="Setup Biometrics"
+            tools:layout="@layout/fragment_biometric_setup">
+            <action
+                android:id="@+id/action_biometricSetupFragment_to_mainFragment"
+                app:destination="@id/mainFragment"
+                app:popUpTo="@id/loginFragment"
+                app:popUpToInclusive="true" />
+            <action
+                android:id="@+id/action_biometricSetupFragment_to_resetPassword"
+                app:destination="@id/resetPassword"
+                app:popUpToInclusive="false" />
+            <action
+                android:id="@+id/action_biometricSetupFragment_to_verificationFragment"
+                app:destination="@id/verificationFragment"
+                app:popUpTo="@id/biometricSetupFragment" />
+            <action
+                android:id="@+id/action_biometricSetupFragment_to_registerFragment"
+                app:destination="@id/registerFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/resetPassword"
+            android:name="com.example.biometriclogin.Login.Reset.ResetPassword"
+            android:label="Reset Password"
+            tools:layout="@layout/fragment_reset_password">
+            <action
+                android:id="@+id/action_resetPassword_to_loginFragment"
+                app:destination="@id/loginFragment"
+                app:popUpTo="@id/login_nested_graph" />
+        </fragment>
+        <fragment
+            android:id="@+id/verificationFragment"
+            android:name="com.example.biometriclogin.Login.Verification.VerificationFragment"
+            android:label="Verify Email"
+            tools:layout="@layout/fragment_verification">
+            <action
+                android:id="@+id/action_verificationFragment_to_loginFragment"
+                app:destination="@id/loginFragment"
+                app:popUpTo="@id/login_nested_graph" />
         </fragment>
     </navigation>
+    <fragment
+        android:id="@+id/editUserInfo"
+        android:name="com.example.biometriclogin.EditUserInfo"
+        android:label="Edit User"
+        tools:layout="@layout/fragment_edit_user_info" />
+
 </navigation>

@@ -1,0 +1,1 @@
+A mock up app using firebase auth email and password login, and android biometric.

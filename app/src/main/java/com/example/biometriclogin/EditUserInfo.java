@@ -118,7 +118,7 @@ public class EditUserInfo extends Fragment {
                         phoneEditText.setVisibility(View.VISIBLE);
                         phoneEditText.setText(documentSnapshot.getString("Phone"));
                     } else {
-                        phoneEditText.setVisibility(GONE);
+                        Log.d(LOGTAG, "User has not yet added phone.");
                     }
                 }
             });

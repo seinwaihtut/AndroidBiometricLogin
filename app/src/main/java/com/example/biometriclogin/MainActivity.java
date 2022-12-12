@@ -176,6 +176,9 @@ public class MainActivity extends AppCompatActivity {
                     navController.popBackStack();
                     navController.navigate(R.id.login_nested_graph);
                     mainLayout.setVisibility(View.VISIBLE);}
+                    else{//Code is 10, exit app
+                        finishAffinity();
+                    }
                 }
 
                 @Override

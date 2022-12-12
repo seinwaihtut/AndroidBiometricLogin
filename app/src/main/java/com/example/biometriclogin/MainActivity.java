@@ -164,28 +164,32 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
                     super.onAuthenticationError(errorCode, errString);
+                    Log.d(LOGTAG, Integer.toString(errorCode)+errString);
+
+
+                    //errorCode 10 authentication cancelled - back/ home is pressed without using fingerprint
+                    //errorCode 7 too many attempts try again later
+                    if (errorCode!=10){
 
                     FirebaseAuth.getInstance().signOut();
                     sharedPreferences.edit().putBoolean(BIOMETRIC_SHARED_PREFERENCES_ENABLED_FLAG, false).apply();
                     navController.popBackStack();
                     navController.navigate(R.id.login_nested_graph);
-                    mainLayout.setVisibility(View.VISIBLE);
-
+                    mainLayout.setVisibility(View.VISIBLE);}
                 }
 
                 @Override
                 public void onAuthenticationSucceeded(@NonNull BiometricPrompt.AuthenticationResult result) {
                     super.onAuthenticationSucceeded(result);
                     mainLayout.setVisibility(View.VISIBLE);
-                    Toast.makeText(getApplicationContext(),
-                            "Authentication succeeded!",
-                            Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getApplicationContext(),
+//                            "Authentication succeeded!",
+//                            Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
                 public void onAuthenticationFailed() {
                     super.onAuthenticationFailed();
-
 
                     Toast.makeText(getApplicationContext(),
                             "Authentication failed.",
@@ -202,7 +206,6 @@ public class MainActivity extends AppCompatActivity {
                 mainLayout.setVisibility(View.INVISIBLE);
                 biometricPrompt.authenticate(promptInfo);
             }
-
         }
     }
 }

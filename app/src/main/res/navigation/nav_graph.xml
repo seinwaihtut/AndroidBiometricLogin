@@ -14,10 +14,23 @@
             android:id="@+id/action_mainFragment_to_login_nested_graph"
             app:destination="@id/login_nested_graph"
             app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out"
+
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out"
+            />
         <action
             android:id="@+id/action_mainFragment_to_editUserInfo"
-            app:destination="@id/editUserInfo" />
+            app:destination="@id/editUserInfo"
+
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"
+            />
     </fragment>
 
     <navigation android:id="@+id/login_nested_graph"
@@ -30,10 +43,22 @@
             <action
                 android:id="@+id/action_registerFragment_to_loginFragment"
                 app:destination="@id/loginFragment"
-                app:popUpTo="@id/login_nested_graph" />
+                app:popUpTo="@id/login_nested_graph"
+
+                app:enterAnim="@android:anim/slide_in_left"
+                app:exitAnim="@android:anim/slide_out_right"
+                app:popEnterAnim="@android:anim/slide_in_left"
+                app:popExitAnim="@android:anim/slide_out_right"
+                />
             <action
                 android:id="@+id/action_registerFragment_to_resetPassword"
-                app:destination="@id/resetPassword" />
+                app:destination="@id/resetPassword"
+
+                app:enterAnim="@android:anim/slide_in_left"
+                app:exitAnim="@android:anim/slide_out_right"
+                app:popEnterAnim="@android:anim/slide_in_left"
+                app:popExitAnim="@android:anim/slide_out_right"
+                />
         </fragment>
         <fragment
             android:id="@+id/loginFragment"
@@ -43,21 +68,46 @@
             <action
                 android:id="@+id/action_loginFragment_to_mainFragment"
                 app:destination="@id/mainFragment"
+                app:enterAnim="@android:anim/fade_in"
+                app:exitAnim="@android:anim/fade_out"
+
+                app:popEnterAnim="@android:anim/fade_in"
+                app:popExitAnim="@android:anim/fade_out"
                 app:popUpTo="@id/loginFragment"
                 app:popUpToInclusive="true" />
             <action
                 android:id="@+id/action_loginFragment_to_registerFragment"
-                app:destination="@id/registerFragment" />
+                app:destination="@id/registerFragment"
+                app:enterAnim="@android:anim/slide_in_left"
+                app:exitAnim="@android:anim/slide_out_right"
+                app:popEnterAnim="@android:anim/slide_in_left"
+                app:popExitAnim="@android:anim/slide_out_right"
+                />
             <action
                 android:id="@+id/action_loginFragment_to_biometricSetupFragment"
-                app:destination="@id/biometricSetupFragment" />
+                app:destination="@id/biometricSetupFragment"
+                app:enterAnim="@android:anim/slide_in_left"
+                app:exitAnim="@android:anim/slide_out_right"
+                app:popEnterAnim="@android:anim/slide_in_left"
+                app:popExitAnim="@android:anim/slide_out_right" />
             <action
                 android:id="@+id/action_loginFragment_to_resetPassword"
                 app:destination="@id/resetPassword"
-                app:popUpToInclusive="false" />
+                app:popUpToInclusive="false"
+
+                app:enterAnim="@android:anim/slide_in_left"
+                app:exitAnim="@android:anim/slide_out_right"
+                app:popEnterAnim="@android:anim/slide_in_left"
+                app:popExitAnim="@android:anim/slide_out_right"/>
             <action
                 android:id="@+id/action_loginFragment_to_verificationFragment"
-                app:destination="@id/verificationFragment" />
+                app:destination="@id/verificationFragment"
+
+                app:enterAnim="@android:anim/fade_in"
+                app:exitAnim="@android:anim/fade_out"
+
+                app:popEnterAnim="@android:anim/fade_in"
+                app:popExitAnim="@android:anim/fade_out"/>
         </fragment>
         <fragment
             android:id="@+id/biometricSetupFragment"
@@ -68,18 +118,41 @@
                 android:id="@+id/action_biometricSetupFragment_to_mainFragment"
                 app:destination="@id/mainFragment"
                 app:popUpTo="@id/loginFragment"
-                app:popUpToInclusive="true" />
+                app:popUpToInclusive="true"
+
+                app:enterAnim="@android:anim/fade_in"
+                app:exitAnim="@android:anim/fade_out"
+
+                app:popEnterAnim="@android:anim/fade_in"
+                app:popExitAnim="@android:anim/fade_out"
+                />
             <action
                 android:id="@+id/action_biometricSetupFragment_to_resetPassword"
                 app:destination="@id/resetPassword"
-                app:popUpToInclusive="false" />
+                app:popUpToInclusive="false"
+
+                app:enterAnim="@android:anim/slide_in_left"
+                app:exitAnim="@android:anim/slide_out_right"
+                app:popEnterAnim="@android:anim/slide_in_left"
+                app:popExitAnim="@android:anim/slide_out_right"/>
             <action
                 android:id="@+id/action_biometricSetupFragment_to_verificationFragment"
                 app:destination="@id/verificationFragment"
-                app:popUpTo="@id/biometricSetupFragment" />
+                app:popUpTo="@id/biometricSetupFragment"
+
+                app:enterAnim="@android:anim/fade_in"
+                app:exitAnim="@android:anim/fade_out"
+
+                app:popEnterAnim="@android:anim/fade_in"
+                app:popExitAnim="@android:anim/fade_out"
+                />
             <action
                 android:id="@+id/action_biometricSetupFragment_to_registerFragment"
-                app:destination="@id/registerFragment" />
+                app:destination="@id/registerFragment"
+                app:enterAnim="@android:anim/slide_in_left"
+                app:exitAnim="@android:anim/slide_out_right"
+                app:popEnterAnim="@android:anim/slide_in_left"
+                app:popExitAnim="@android:anim/slide_out_right"/>
         </fragment>
         <fragment
             android:id="@+id/resetPassword"
@@ -89,7 +162,12 @@
             <action
                 android:id="@+id/action_resetPassword_to_loginFragment"
                 app:destination="@id/loginFragment"
-                app:popUpTo="@id/login_nested_graph" />
+                app:popUpTo="@id/login_nested_graph"
+                app:enterAnim="@android:anim/slide_in_left"
+                app:exitAnim="@android:anim/slide_out_right"
+                app:popEnterAnim="@android:anim/slide_in_left"
+                app:popExitAnim="@android:anim/slide_out_right"
+                />
         </fragment>
         <fragment
             android:id="@+id/verificationFragment"
@@ -99,7 +177,13 @@
             <action
                 android:id="@+id/action_verificationFragment_to_loginFragment"
                 app:destination="@id/loginFragment"
-                app:popUpTo="@id/login_nested_graph" />
+                app:popUpTo="@id/login_nested_graph"
+                app:enterAnim="@android:anim/fade_in"
+                app:exitAnim="@android:anim/fade_out"
+
+                app:popEnterAnim="@android:anim/fade_in"
+                app:popExitAnim="@android:anim/fade_out"
+                />
         </fragment>
     </navigation>
     <fragment

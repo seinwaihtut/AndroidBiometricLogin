@@ -7,6 +7,9 @@ import android.util.Patterns;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Utils {
     public static boolean isValidEmail(CharSequence target) {
         return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
@@ -23,7 +26,9 @@ public class Utils {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-    public static boolean isPhoneValid(CharSequence phoneNo){
-        return false;
+    public static boolean isValidPhone(String phoneNo) {
+        Pattern phonePattern = Pattern.compile("^((09|\\+?959)?\\d{7,10})$");
+        Matcher matcher = phonePattern.matcher(phoneNo);
+        return matcher.matches();
     }
 }

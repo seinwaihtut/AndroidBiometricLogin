@@ -92,7 +92,7 @@ public class MainFragment extends Fragment {
 
         sharedPreferences = getActivity().getSharedPreferences(BIOMETRIC_SHARED_PREFERENCES, Context.MODE_PRIVATE);
         biometricEnabledSwitch.setChecked(sharedPreferences.getBoolean(BIOMETRIC_SHARED_PREFERENCES_ENABLED_FLAG, false)); //Set initial state for switch
-
+        phone.setVisibility(GONE);
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
 

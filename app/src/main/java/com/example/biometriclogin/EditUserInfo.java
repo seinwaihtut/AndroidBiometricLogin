@@ -15,6 +15,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.provider.DocumentsContract;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -115,7 +117,7 @@ public class EditUserInfo extends Fragment {
                     if (documentSnapshot.exists()) {
                         phoneEditText.setVisibility(View.VISIBLE);
                         phoneEditText.setText(documentSnapshot.getString("Phone"));
-                    }else{
+                    } else {
                         phoneEditText.setVisibility(GONE);
                     }
                 }
@@ -127,74 +129,100 @@ public class EditUserInfo extends Fragment {
             if (user.getDisplayName() != null) {
                 nameEditText.setText(user.getDisplayName());
             } else nameEditText.setText("");
-            //Ph no.
         }
+
+        phoneEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                phoneLayout.setHelperTextEnabled(false);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
 
         view.findViewById(R.id.edit_user_main_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                progressBar.setVisibility(View.VISIBLE);
+
                 documentReference = db.document("users/" + user.getEmail());
+                String phone_number_string = phoneEditText.getText().toString();
 
                 Map<String, Object> user_phone = new HashMap<>();
-                user_phone.put("Phone", phoneEditText.getText().toString());
+                user_phone.put("Phone", phone_number_string);
 
-                if (user != null) {
 
-                    documentReference.set(user_phone).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    if (userImageUri != null) {
-                                        //image is selected
-                                        if (user != null) {
-                                            UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(nameEditText.getText().toString()).setPhotoUri(userImageUri).build();
-                                            user.updateProfile(userProfileChangeRequest).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void unused) {
-                                                    navController.navigateUp();
-                                                }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
+                if (phone_number_string.isEmpty() | Utils.isValidPhone(phone_number_string)) {
+                    progressBar.setVisibility(View.VISIBLE);
 
-                                                    progressBar.setVisibility(View.GONE);
-                                                    Toast.makeText(getContext(), "Some error occurred.", Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
+                    if (user != null) {
+
+                        documentReference.set(user_phone).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        if (userImageUri != null) {
+                                            //image is selected
+                                            if (user != null) {
+                                                UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(nameEditText.getText().toString()).setPhotoUri(userImageUri).build();
+                                                user.updateProfile(userProfileChangeRequest).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+                                                        navController.navigateUp();
+                                                    }
+                                                }).addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+
+                                                        progressBar.setVisibility(View.GONE);
+                                                        Toast.makeText(getContext(), "Some error occurred.", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                            }
+                                        } else if (userImageUri == null) {
+                                            //image is not selected
+                                            if (user != null) {
+                                                UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(nameEditText.getText().toString()).build();
+                                                user.updateProfile(userProfileChangeRequest)
+                                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void unused) {
+                                                                navController.navigateUp();
+                                                            }
+                                                        }).addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                progressBar.setVisibility(View.GONE);
+                                                                Toast.makeText(getContext(), "Some error occurred.", Toast.LENGTH_SHORT).show();
+                                                            }
+                                                        });
+                                            }
+                                        } else {
+                                            navController.navigateUp();
                                         }
-                                    } else if (userImageUri == null) {
-                                        //image is not selected
-                                        if (user != null) {
-                                            UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder().setDisplayName(nameEditText.getText().toString()).build();
-                                            user.updateProfile(userProfileChangeRequest)
-                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                        @Override
-                                                        public void onSuccess(Void unused) {
-                                                            navController.navigateUp();
-                                                        }
-                                                    }).addOnFailureListener(new OnFailureListener() {
-                                                        @Override
-                                                        public void onFailure(@NonNull Exception e) {
-                                                            progressBar.setVisibility(View.GONE);
-                                                            Toast.makeText(getContext(), "Some error occurred.", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                    });
-                                        }
-                                    } else {
-                                        navController.navigateUp();
                                     }
-                                }
 
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    progressBar.setVisibility(View.GONE);
-                                    Toast.makeText(getContext(), "Some error occurred.", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        progressBar.setVisibility(View.GONE);
+                                        Toast.makeText(getContext(), "Some error occurred.", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                    }
+                } else {
+                    progressBar.setVisibility(GONE);
+                    phoneLayout.setHelperTextEnabled(true);
+                    phoneLayout.setHelperText("Invalid Phone Number");
                 }
 
 
